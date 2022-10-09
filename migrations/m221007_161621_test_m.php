@@ -15,9 +15,7 @@ class m221007_161621_test_m extends Migration
 
     }
 
-    /**
-     * {@inheritdoc}
-     */
+
     public function safeDown()
     {
         echo "m221007_161621_test_m cannot be reverted.\n";
