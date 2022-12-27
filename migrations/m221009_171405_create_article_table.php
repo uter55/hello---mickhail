@@ -12,7 +12,7 @@ class m221009_171405_create_article_table extends Migration
      */
     public function safeUp()
     {
-        $this->createTable('Article', [
+        $this->createTable('article', [
             'id' => $this->primaryKey(),
             'NameArticle'=> $this->string(),
             'text'=> $this->string(8000)->notNull(),
@@ -28,6 +28,6 @@ class m221009_171405_create_article_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('Article');
+        $this->dropTable('article');
     }
 }
