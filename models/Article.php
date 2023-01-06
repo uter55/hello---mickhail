@@ -1,6 +1,8 @@
 <?php
 
+
 namespace app\models;
+
 
 use Yii;
 
@@ -13,6 +15,7 @@ use Yii;
  * @property string|null $createdAt
  * @property string|null $updatedAt
  */
+
 class Article extends \yii\db\ActiveRecord
 {
     /**
@@ -35,6 +38,8 @@ class Article extends \yii\db\ActiveRecord
             [['text'], 'string', 'min'=> 20, 'max' => 8000],
         ];
     }
+
+
 
     /**
      * {@inheritdoc}

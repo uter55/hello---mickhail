@@ -2,22 +2,16 @@
 
 use yii\db\Migration;
 
-/**
- * Class m221025_171703_mod_article_namearticle
- */
+
 class m221025_171703_mod_article_namearticle extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
+
     public function safeUp()
     {
         $this->alterColumn('article','NameArticle', $this->string()->notNull());
     }
 
-    /**
-     * {@inheritdoc}
-     */
+
     public function safeDown()
     {
         $this->alterColumn('article','NameArticle', $this->string()->null());

@@ -12,5 +12,5 @@ use yii\helpers\Url;
 </ul>
 <a href="<?= Url::to(['article/showdb']);?> "> зарегистрированные участники </a>
 <?php
-
 ?>
+
