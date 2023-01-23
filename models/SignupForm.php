@@ -4,7 +4,8 @@ namespace app\models;
 use yii\base\Model;
 use yii\swiftmailer\Message;
 
-class SignupForm extends Model{
+class SignupForm extends Model
+{
 
     public $username;
 
