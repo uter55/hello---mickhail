@@ -6,11 +6,11 @@ use yii\db\ActiveRecord;
 
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
-    public $id;
-    public $username;
+//    public $id;
+//    public $username;
 //    public $password;
     public $authKey;
-    public $accessToken;
+//    public $accessToken;
 //
 //    private static $users = [
 //        '100' => [
@@ -93,7 +93,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function validateAuthKey($authKey)
     {
-        return $this->authKey === $authKey;
+//        return $this->authKey === $authKey;
     }
 
     /**
@@ -104,7 +104,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function validatePassword($password)
     {
-//        return $this->password === $password;
+       // return $this->password === $password;
         return \Yii::$app->security->validatePassword($password, $this->password);
     }
 }
