@@ -13,6 +13,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\EntryForm;
 use app\models\User;
+use app\models\Article;
 
 
 class SiteController extends Controller
@@ -20,33 +21,33 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout', 'index', 'about', 'contact'],
-                'rules' => [
-                    [
-                        'actions' => ['logout', 'index', 'about', 'contact'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                    [
-                        'actions' => ['login', 'signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
+//    public function behaviors()
+//    {
+//        return [
+//            'access' => [
+//                'class' => AccessControl::className(),
+//                'only' => ['logout', 'index', 'about', 'contact','signup','home','article'],
+//                'rules' => [
+//                    [
+//                        'actions' => ['logout', 'index', 'about', 'contact','home', 'article'],
+//                        'allow' => true,
+//                        'roles' => ['@'],
+//                    ],
+//                    [
+//                        'actions' => ['login', 'signup'],
+//                        'allow' => true,
+//                        'roles' => ['?'],
+//                    ],
+//                ],
+//            ],
+//            'verbs' => [
+//                'class' => VerbFilter::className(),
+//                'actions' => [
+//                    'logout' => ['post'],
+//                ],
+//            ],
+//        ];
+//    }
 
     /**
      * {@inheritdoc}
@@ -90,8 +91,14 @@ class SiteController extends Controller
 //var_dump(Yii::$app->user->isGuest);
 //die();
 //            return $this->goBack();
-        return $this->redirect('?r=site/contact');
-        }
+        return $this->redirect('?r=site/contact');}
+//            if ( Yii::$app->user->isGuest) {
+//                return $this->render('/layouts/guest');
+//            }
+
+
+
+
 
         $model->password = '';
         return $this->render('login', [
@@ -109,6 +116,7 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+
     }
 
     /**
@@ -179,5 +187,7 @@ class SiteController extends Controller
 
         return $this->render('signup', compact('model'));
     }
+
+
 
 }
