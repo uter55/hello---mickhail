@@ -10,35 +10,35 @@ use yii\data\ActiveDataProvider;
 class ArticleController extends Controller
 {
 
-//    public function behaviors()
-//    {
-//
-//        return [
-//            'access' => [
-//                'class' => AccessControl::className(),
-//                'only' => ['article', 'showdb', 'text'],
-//                'rules' => [
-//                    [
-//                        'actions' => ['article', 'showdb', 'text'],
-//                        'allow' => true,
-//                        'roles' => ['@'],
-//                    ],
-////                    [
-////                        'actions' => ['login', 'signup'],
-////                        'allow' => true,
-////                        'roles' => ['?'],
-////                    ],
-//                ],
-//            ],];
-//    }
+    public function behaviors()
+    {
+
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['article', 'showdb', 'text'],
+                'rules' => [
+                    [
+                        'actions' => ['article', 'showdb', 'text'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['login', 'signup'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                ],
+            ],];
+    }
 
     public function actionArticle()
     {
 
         $model = new Article ();
         $model->load(\Yii::$app->request->post()) && $model->validate();
-        $model->createdAt = time();
-        $model->updatedAt = time();
+        $model->createdAt = date('y-m-d H:i', time());
+        $model->updatedAt = date('y-m-d H:i', time());
         if ($model->save()) {
             return $this->render('Save_Confirm', compact('model'));
         } else {
@@ -77,4 +77,13 @@ class ArticleController extends Controller
         ]);
         return $this->render('showdb', ['dataProvider' => $dataProvider]);
     }
+    public function actionView ($id){
+        $model = Article::findOne($id);
+        return $this->render('view', [ 'model'=>$model]);
+    }
+    public function actionUpdate ($id){
+        $model = Article::findOne($id);
+        return $this->render('edit', [ 'model'=>$model]);
+    }
+
 }

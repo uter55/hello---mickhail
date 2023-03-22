@@ -13,6 +13,7 @@ use yii\data\ActiveDataProvider;
 
 
 $this->title = 'Статьи';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
@@ -46,6 +47,14 @@ $this->title = 'Статьи';
 
 echo GridView::widget([
     'dataProvider' => $dataProvider,
+    'columns' =>[
+                'id',
+                 'author',
+                 'NameArticle',
+                  'text',
+
+            ['class'=> 'yii\grid\ActionColumn']
+    ]
 ]);
 
 

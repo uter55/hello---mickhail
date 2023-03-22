@@ -21,33 +21,33 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
-//    public function behaviors()
-//    {
-//        return [
-//            'access' => [
-//                'class' => AccessControl::className(),
-//                'only' => ['logout', 'index', 'about', 'contact','signup','home','article'],
-//                'rules' => [
-//                    [
-//                        'actions' => ['logout', 'index', 'about', 'contact','home', 'article'],
-//                        'allow' => true,
-//                        'roles' => ['@'],
-//                    ],
-//                    [
-//                        'actions' => ['login', 'signup'],
-//                        'allow' => true,
-//                        'roles' => ['?'],
-//                    ],
-//                ],
-//            ],
-//            'verbs' => [
-//                'class' => VerbFilter::className(),
-//                'actions' => [
-//                    'logout' => ['post'],
-//                ],
-//            ],
-//        ];
-//    }
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout', 'index', 'about', 'contact','signup','home','article'],
+                'rules' => [
+                    [
+                        'actions' => ['logout', 'index', 'about', 'contact','home', 'article'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['login', 'signup'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
 
     /**
      * {@inheritdoc}

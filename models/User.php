@@ -3,15 +3,17 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
+use yii\widgets\DetailView;
 
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
 //    public $id;
 //    public $username;
-//    public $password;
-    public $authKey;
+    public $password;
+//    public $authKey;
 //    public $accessToken;
-//
+//      public $position;
+      public $role = 'user';
 //    private static $users = [
 //        '100' => [
 //            'id' => '100',
@@ -107,4 +109,9 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
        // return $this->password === $password;
         return \Yii::$app->security->validatePassword($password, $this->password);
     }
+    public function getStatusName()
+    {
+
+    }
+
 }
