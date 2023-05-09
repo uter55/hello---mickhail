@@ -52,6 +52,8 @@ echo GridView::widget([
                  'author',
                  'NameArticle',
                   'text',
+                  'createdAt',
+                   'updatedAt',
 
             ['class'=> 'yii\grid\ActionColumn']
     ]

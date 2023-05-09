@@ -42,11 +42,21 @@ class UsersController extends Controller
     {
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+        $user= new User();
+        $user->created_at = date('y-m-d H:i', time());
+        if ($user->save()) {
+            echo '<pre>';
+                var_dump($user->save());
+            die();
+//                throw new BadRequestHttpException();
+            return $this->goHome();
+        }
+
+
     }
 
     /**
@@ -72,6 +82,7 @@ class UsersController extends Controller
         $model = new User();
         $model->scenario = User::SCENARIO_ADMIN_CREATE;
 //        $model->status = User::STATUS_ACTIVE;
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

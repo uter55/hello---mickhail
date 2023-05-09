@@ -10,10 +10,10 @@ class User extends \app\models\User
     const SCENARIO_ADMIN_CREATE = 'adminCreate';
     const SCENARIO_ADMIN_UPDATE = 'adminUpdate';
 
-
-    const STATUS_ACTIVE = 1;
-    const STATUS_WAIT = 2;
-    const STATUS_BLOCKED = 3;
+    public $created_at;
+    public const STATUS_ACTIVE = 1;
+    public const STATUS_WAIT = 2;
+    public const STATUS_BLOCKED = 3;
 
     public $newPassword;
     public $newPasswordRepeat;
@@ -24,8 +24,9 @@ class User extends \app\models\User
             [['newPassword', 'newPasswordRepeat'], 'required', 'on' => self::SCENARIO_ADMIN_CREATE],
             ['newPassword', 'string', 'min' => 6],
             ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword'],
-            [['username','password','role'], 'string'],
-            [['position'],'integer']
+            [['username','password','role', 'created_at'], 'string'],
+            [['position'],'integer'],
+//            [['created_at'], 'date', 'format' => 'y-m-d H:i'],
                     ]);
     }
     public function scenarios()
@@ -40,6 +41,7 @@ class User extends \app\models\User
         return ArrayHelper::merge(parent::attributeLabels(), [
             'newPassword' => Yii::t('app', 'USER_NEW_PASSWORD'),
             'newPasswordRepeat' => Yii::t('app', 'USER_REPEAT_PASSWORD'),
+            'created_at'=> Yii::t('app','Created'),
         ]);
     }
     public function beforeSave($insert)

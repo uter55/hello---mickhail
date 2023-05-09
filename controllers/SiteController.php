@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\SignupForm;
+use app\modules\admin\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
@@ -12,7 +13,6 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\EntryForm;
-use app\models\User;
 use app\models\Article;
 
 
@@ -26,10 +26,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'index', 'about', 'contact','signup','home','article'],
+                'only' => ['logout', 'index', 'about', 'contact', 'signup', 'home', 'article'],
                 'rules' => [
                     [
-                        'actions' => ['logout', 'index', 'about', 'contact','home', 'article'],
+                        'actions' => ['logout', 'index', 'about', 'contact', 'home', 'article'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -91,13 +91,11 @@ class SiteController extends Controller
 //var_dump(Yii::$app->user->isGuest);
 //die();
 //            return $this->goBack();
-        return $this->redirect('?r=site/contact');}
+            return $this->redirect('?r=site/contact');
+        }
 //            if ( Yii::$app->user->isGuest) {
 //                return $this->render('/layouts/guest');
 //            }
-
-
-
 
 
         $model->password = '';
@@ -168,6 +166,11 @@ class SiteController extends Controller
         }
     }
 
+    /**
+     * action for signup
+     * @return string|Response
+     * @throws \yii\base\Exception
+     */
     public function actionSignup()
     {
         if (!Yii::$app->user->isGuest) {
@@ -179,15 +182,25 @@ class SiteController extends Controller
             $user = new User();
             $user->username = $model->username;
             $user->password = \Yii::$app->security->generatePasswordHash($model->password);
+            $user->position = User::STATUS_ACTIVE;
+            $user->created_at = date('y-m-d H:i', time());
+//            echo '<pre>';
+//            var_dump($user);
+//die;
+//            $user->password = "test";
+//            var_dump(Yii::$app->security->generatePasswordHash($model->password));
+//            die();
             if ($user->save()) {
+//            echo '<pre>';
+//                var_dump($user->getErrors());
+//            die();
 //                throw new BadRequestHttpException();
-               return $this->redirect("http://localhost/basic/web/index.php?r=site%2Fsignup");
+                return $this->redirect("http://localhost/basic/web/index.php?r=site%2Fsignup");
             }
         }
 
         return $this->render('signup', compact('model'));
     }
-
 
 
 }

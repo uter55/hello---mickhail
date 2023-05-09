@@ -5,14 +5,14 @@ use yii\db\Migration;
 /**
  * Handles adding columns to table `{{%user}}`.
  */
-class m230321_165216_add_status_column_to_user_table extends Migration
+class m230501_160427_add_created_at_column_to_user_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->addColumn('{{%user}}', 'status', $this->ineger());
+        $this->addColumn('{{%user}}', 'created_at', $this->dateTime());
     }
 
     /**
@@ -20,6 +20,6 @@ class m230321_165216_add_status_column_to_user_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropColumn('{{%user}}', 'status');
+        $this->dropColumn('{{%user}}', 'created_at');
     }
 }

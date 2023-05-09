@@ -9,11 +9,13 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
 //    public $id;
 //    public $username;
-    public $password;
-//    public $authKey;
+//    public $password;
+    public $authKey;
 //    public $accessToken;
 //      public $position;
       public $role = 'user';
+      public $created_at;
+//      public $created_at;
 //    private static $users = [
 //        '100' => [
 //            'id' => '100',
@@ -31,7 +33,16 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 //        ],
 //    ];
 
+//    public function rules()
+//    {
+//        return [[['created_at'], 'date', 'format' => 'y-m-d H:i',],];
+//    }
 
+
+    public static function tableName()
+    {
+        return '{{%user}}';
+    }
     /**
      * {@inheritdoc}
      */
@@ -107,6 +118,8 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     public function validatePassword($password)
     {
        // return $this->password === $password;
+        if(is_null($this->password))
+            return false;
         return \Yii::$app->security->validatePassword($password, $this->password);
     }
     public function getStatusName()

@@ -1,6 +1,6 @@
 <?php
 
-use app\modules\admin\models\Order;
+
 use app\modules\admin\models\User;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -36,13 +36,27 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
+//                ['class' => 'yii\grid\SerialColumn'],
 
 
             'id',
             'username',
             'email:email',
-            'created_at:datetime',
             [
+                'filter' =>
+                    Html::tag(
+                        'div',
+                        Html::tag('div', Html::activeTextInput($searchModel, 'date_from', ['class' => 'form-control']), ['class' => 'col-xs-6']) .
+                        Html::tag('div', Html::activeTextInput($searchModel, 'date_to', ['class' => 'form-control']), ['class' => 'col-xs-6']),
+                        ['class' => 'row']
+                    )
+,
+                'attribute' => 'created_at',
+                'format' => 'datetime',
+            ],
+
+            [
+
 //                'class' => SetColumn::className(),
 //                'filter' => User::getStatusesArray(),
                 'attribute' => 'position',
@@ -66,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         default:
                             $class = 'default';
                     };
-                    $html = Html::tag('span', isset(User::getStatusesArray()[$value]) ? User::getStatusesArray()[$value]:'' , ['class' => 'label label-' . $class]);
+                    $html = Html::tag('span', User::getStatusesArray()[$value] ?? '' , ['class' => 'label label-' . $class]);
                     return  $html;
                 }
             ],

@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
+use app\modules\admin\models\User;
 
 /** @var yii\web\View $this */
 /** @var app\models\User $model */
@@ -38,7 +39,28 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_at:datetime',
             [
                 'attribute' => 'position',
-                'value' => $model->getStatusName(),
+                'format' => 'raw',
+                'value' => function ($model) {
+                    /** @var User $model */
+                    /** @var \yii\grid\DataColumn $column */
+                    $value = $model->position;
+//                    echo '<pre>';
+//                    var_dump($model);
+//                    die();
+                    switch ($value) {
+                        case User::STATUS_ACTIVE:
+                            $class = 'success';
+                            break;
+                        case User::STATUS_WAIT:
+                            $class = 'warning';
+                            break;
+                        case User::STATUS_BLOCKED:
+                        default:
+                            $class = 'default';
+                    };
+                    $html = Html::tag('span', User::getStatusesArray()[$value] ?? '' , ['class' => 'label label-' . $class]);
+                    return  $html;
+                }
             ],
         ],
 
