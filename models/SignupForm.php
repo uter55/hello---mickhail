@@ -23,6 +23,7 @@ class SignupForm extends Model
 //            'tooBig' => 'Пароль не может состоять менее чем из 6 - ти символов.', ' tooSmall' => 'Пароль не может привышать 20 -ти знаков'
 //            'password' => [['password'], 'string', 'max' => 20, ],
         ];
+
     }
 
     public function attributeLabels() {

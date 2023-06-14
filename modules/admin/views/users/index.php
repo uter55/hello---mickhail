@@ -49,8 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         Html::tag('div', Html::activeTextInput($searchModel, 'date_from', ['class' => 'form-control']), ['class' => 'col-xs-6']) .
                         Html::tag('div', Html::activeTextInput($searchModel, 'date_to', ['class' => 'form-control']), ['class' => 'col-xs-6']),
                         ['class' => 'row']
-                    )
-,
+                    ),
                 'attribute' => 'created_at',
                 'format' => 'datetime',
             ],

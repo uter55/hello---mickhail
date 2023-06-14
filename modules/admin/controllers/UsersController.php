@@ -9,6 +9,7 @@ use app\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * UsersController implements the CRUD actions for User model.
@@ -18,19 +19,42 @@ class UsersController extends Controller
     /**
      * @inheritDoc
      */
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
-            ]
-        );
+//    public function behaviors()
+//    {
+//        return array_merge(
+//            parent::behaviors(),
+//            [
+//                'verbs' => [
+//                    'class' => VerbFilter::className(),
+//                    'actions' => [
+//                        'delete' => ['POST'],
+//                    ],
+//                ],
+////                'access' => [
+////                    'class' => AccessControl::className(),
+////                    'only' => ['Index', 'View', 'Create', 'Update'],
+////                    'rules' => [[
+////                        'allow' => true,
+////                        'actions' => ['Index', 'View', 'Create', 'Update'],
+////                        'roles' => ['?'],
+////                    ]
+////                    ],
+////            ],
+//                ]
+//        );
+//    }
+    public function behaviors(){
+        return ['access' => [
+            'class' => AccessControl::class,
+            'only' => ['Index', 'View', 'Create', 'Update'],
+            'rules' => [
+                [
+                    'allow' => true,
+                    'actions' => ['Index', 'View', 'Create', 'Update'],
+                    'roles' => ['?'],
+                ],]
+        ]
+        ];
     }
 
     /**
@@ -46,15 +70,15 @@ class UsersController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-        $user= new User();
-        $user->created_at = date('y-m-d H:i', time());
-        if ($user->save()) {
-            echo '<pre>';
-                var_dump($user->save());
-            die();
-//                throw new BadRequestHttpException();
-            return $this->goHome();
-        }
+//        $user= new User();
+//        $user->created_at = date('y-m-d H:i', time());
+//        if ($user->save()) {
+//////            echo '<pre>';
+//////                var_dump($user->save());
+//////            die();
+////////                throw new BadRequestHttpException();
+//            return $this->goHome();
+//        }
 
 
     }

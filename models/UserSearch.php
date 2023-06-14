@@ -33,9 +33,9 @@ class   UserSearch extends Model
         return [
             [['id'], 'integer'],
             [['username', 'password', 'role','email'], 'safe'],
-            [['date_from', 'date_to'], 'date', 'format' => 'php:Y-m-d'],
-//            [['createdAt', 'updatedAt'], 'date', 'format' => 'php:Y-m-d H:i'],
-//            [['created_at'],'date', 'format' => 'y-m-d H:i'],
+            [['date_from', 'date_to'], 'date', 'format' => 'Y-m-d H:i:s'],
+//          [['createdAt', 'updatedAt'], 'date', 'format' => 'php:Y-m-d H:i'],
+//          [['created_at'],'date', 'format' => 'Y-m-d H:i:s'],
         ];
     }
 
@@ -57,6 +57,7 @@ class   UserSearch extends Model
             'status' => Yii::t('app', 'USER_STATUS'),
             'date_from' => Yii::t('app', 'USER_DATE_FROM'),
             'date_to' => Yii::t('app', 'USER_DATE_TO'),
+            'created_at'=> Yii::t('app','111'),
 
         ];
     }
@@ -69,12 +70,15 @@ class   UserSearch extends Model
      */
     public function search($params)
     {
-        $dateFrom = $this->date_from ? $this->date_from . ' 00:00:00' : null;
-        $dateTo = $this->date_to ? $this->date_to . ' 23:59:59' : null;
+
         $query = User::find();
-
+        $dateFrom = isset($params['UserSearch']['date_from'])?$params['UserSearch']['date_from']  : null;
+        $dateTo = isset($params['UserSearch']['date_to'])?$params['UserSearch']['date_to']  : null;
         // add conditions that should always apply here
-
+//echo '<pre>';
+//        var_dump( $dateFrom);
+//        var_dump($dateTo);
+//die();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
@@ -84,12 +88,7 @@ class   UserSearch extends Model
 
         $this->load($params);
 
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-             $query->where('0=1');
 
-            return $dataProvider;
-        }
 
         // grid filtering conditions
         $query->andFilterWhere([
@@ -98,11 +97,15 @@ class   UserSearch extends Model
             'email'=> $this ->email,
         ]);
 
-        $query->andFilterWhere(['like', 'username', $this->username])
+        $query
+            ->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'password', $this->password])
             ->andFilterWhere(['like','position', $this->position])
-            ->andFilterWhere(['>=', 'created_at', $this->date_from ? strtotime($this->date_from . ' 00:00:00') : null])
-            ->andFilterWhere(['<=', 'created_at', $this->date_to ? strtotime($this->date_to . ' 23:59:59') : null]);
+            ->andFilterWhere(['>=', 'created_at', $dateFrom ])
+            ->andFilterWhere(['<=', 'created_at', $dateTo ]);
+//        echo '<pre>';
+//        var_dump( strtotime($dateFrom  ));
+//        die();
         return $dataProvider;
     }
 

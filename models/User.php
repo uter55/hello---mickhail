@@ -14,8 +14,6 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 //    public $accessToken;
 //      public $position;
       public $role = 'user';
-      public $created_at;
-//      public $created_at;
 //    private static $users = [
 //        '100' => [
 //            'id' => '100',
@@ -33,13 +31,10 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 //        ],
 //    ];
 
-//    public function rules()
-//    {
-//        return [[['created_at'], 'date', 'format' => 'y-m-d H:i',],];
-//    }
+//
 
 
-    public static function tableName()
+        public static function tableName()
     {
         return '{{%user}}';
     }

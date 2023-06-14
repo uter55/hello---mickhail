@@ -183,22 +183,30 @@ class SiteController extends Controller
             $user->username = $model->username;
             $user->password = \Yii::$app->security->generatePasswordHash($model->password);
             $user->position = User::STATUS_ACTIVE;
-            $user->created_at = date('y-m-d H:i', time());
+            $user->created_at = date('Y-m-d h:i:s');
 //            echo '<pre>';
 //            var_dump($user);
-//die;
-//            $user->password = "test";
-//            var_dump(Yii::$app->security->generatePasswordHash($model->password));
-//            die();
+//            die;
+//
             if ($user->save()) {
-//            echo '<pre>';
-//                var_dump($user->getErrors());
-//            die();
+//
 //                throw new BadRequestHttpException();
-                return $this->redirect("http://localhost/basic/web/index.php?r=site%2Fsignup");
+//                echo '<pre>';
+//                var_dump($user->getErrors());
+//                die();
+                return $this->redirect("/basic/web/index.php/site/login");
             }
+//            else {
+//                $user->validate();
+//            }
+//             echo '<pre>';
+//                var_dump($user->getErrors());
+//                die();
         }
 
+//                echo '<pre>';
+//                    var_dump($user->save());
+//        die();
         return $this->render('signup', compact('model'));
     }
 

@@ -12,7 +12,7 @@ class m230501_160427_add_created_at_column_to_user_table extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('{{%user}}', 'created_at', $this->dateTime());
+        $this->addColumn('{{%user}}', 'created_at', $this->timestamp());
     }
 
     /**
