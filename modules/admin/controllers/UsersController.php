@@ -44,16 +44,18 @@ class UsersController extends Controller
 //        );
 //    }
     public function behaviors(){
-        return ['access' => [
-            'class' => AccessControl::class,
-            'only' => ['Index', 'View', 'Create', 'Update'],
-            'rules' => [
-                [
-                    'allow' => true,
-                    'actions' => ['Index', 'View', 'Create', 'Update'],
-                    'roles' => ['?'],
-                ],]
-        ]
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'only' => ['index', 'view', 'create', 'update'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'view', 'create', 'update'],
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
         ];
     }
 

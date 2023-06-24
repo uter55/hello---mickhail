@@ -49,12 +49,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-    <!--    <h1>--><?//= $this->context->action->uniqueId ?><!--</h1>-->
+<!--        <h1>--><?php //= $this->context->action->uniqueId ?><!--</h1>-->
 <!--    <p>-->
 <!--        -->
 <!--    </p>-->
 <!--    <p>-->
 <!--        You may customize this page by editing the following file:<br>-->
-<!--        <code>--><?//= __FILE__ ?><!--</code>-->
+<!--        <code>--><?php //= __FILE__ ?><!--</code>-->
 <!--    </p>-->
 <!--</div>-->

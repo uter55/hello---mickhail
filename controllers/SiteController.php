@@ -177,7 +177,7 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $model = new SignupForm();
+            $model = new SignupForm();
         if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
             $user = new User();
             $user->username = $model->username;
@@ -196,6 +196,9 @@ class SiteController extends Controller
 //                die();
                 return $this->redirect("/basic/web/index.php/site/login");
             }
+            $auth = Yii::$app->authManager;
+            $authorRole = $auth->getRole('author');
+            $auth->assign($authorRole, $user->getId());
 //            else {
 //                $user->validate();
 //            }
