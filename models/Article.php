@@ -34,7 +34,7 @@ class Article extends \yii\db\ActiveRecord
             [['createdAt', 'updatedAt'], 'safe'],
             [['NameArticle'], 'string', 'max' => 255],
             [['text'], 'string', 'max' => 8000],
-            [['author'], 'string', 'max' => 50],
+            [['author'],  'string', 'max' => 50],
         ];
     }
 

@@ -25,6 +25,8 @@ use app\modules\admin\models\User;
 
     <?= $form->field($model, 'position')->dropDownList(User::getStatusesArray()) ?>
 
+    <?= $form->field($model, 'email')->textInput(['type' => 'email']) ?>
+
     <div class="form-group">
         <?= Html::submitButton(
             $model->isNewRecord ? Yii::t('app', 'BUTTON_CREATE') : Yii::t('app', 'BUTTON_CREATE'),

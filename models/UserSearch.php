@@ -21,6 +21,8 @@ class   UserSearch extends Model
     public $date_from;
     public $date_to;
     public $created_at;
+
+
     public static function tableName()
     {
         return 'user';
@@ -28,6 +30,7 @@ class   UserSearch extends Model
     /**
      * {@inheritdoc}
      */
+
     public function rules()
     {
         return [
@@ -36,6 +39,10 @@ class   UserSearch extends Model
             [['date_from', 'date_to'], 'date', 'format' => 'Y-m-d H:i:s'],
 //          [['createdAt', 'updatedAt'], 'date', 'format' => 'php:Y-m-d H:i'],
 //          [['created_at'],'date', 'format' => 'Y-m-d H:i:s'],
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'unique', 'targetClass' => 'app\models\User', 'message' => 'этот email адресс уже занят'],
+
         ];
     }
 
@@ -108,6 +115,5 @@ class   UserSearch extends Model
 //        die();
         return $dataProvider;
     }
-
 
 }

@@ -62,6 +62,7 @@ $config = [
                 'articles' => 'article/article',
                 'table/<id:\d+>'=>'article/view',
 
+
             ],
         ],
 

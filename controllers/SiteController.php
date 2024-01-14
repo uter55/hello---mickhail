@@ -127,6 +127,9 @@ class SiteController extends Controller
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
+//            echo '<pre>';
+//                var_dump(Yii::$app->session->setFlash('contactFormSubmitted'));
+//            die();
 
             return $this->refresh();
         }
@@ -184,27 +187,29 @@ class SiteController extends Controller
             $user->password = \Yii::$app->security->generatePasswordHash($model->password);
             $user->position = User::STATUS_ACTIVE;
             $user->created_at = date('Y-m-d h:i:s');
+            $user->email = $model->email;
 //            echo '<pre>';
 //            var_dump($user);
 //            die;
 //
             if ($user->save()) {
-//
+            $auth = Yii::$app->authManager;
+            $authorRole = $auth->getRole('author');
+            $auth->assign($authorRole, $user->getId());
+//                echo '<pre>';
+//                var_dump($authorRole);
+//                die();
 //                throw new BadRequestHttpException();
 //                echo '<pre>';
 //                var_dump($user->getErrors());
 //                die();
                 return $this->redirect("/basic/web/index.php/site/login");
             }
-            $auth = Yii::$app->authManager;
-            $authorRole = $auth->getRole('author');
-            $auth->assign($authorRole, $user->getId());
+
 //            else {
 //                $user->validate();
 //            }
-//             echo '<pre>';
-//                var_dump($user->getErrors());
-//                die();
+
         }
 
 //                echo '<pre>';

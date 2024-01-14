@@ -11,12 +11,17 @@ class SignupForm extends Model
 
     public $password;
 
+    public $email ;
+
 
     public function rules() {
         return [
             [['username', 'password'], 'required', 'message' => 'Заполните поле'],
             ['username', 'unique', 'targetClass' => User::className(),  'message' => 'Этот логин уже занят'],
             ['password','string','min' => 6, 'max' => 20, 'message' => 'пароль не можеть быть менее 7-ти символов' ],
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'unique', 'targetClass' => 'app\models\User', 'message' => 'этот email адресс уже занят'],
 
 
 //
@@ -30,6 +35,7 @@ class SignupForm extends Model
         return [
             'username' => 'Логин',
             'password' => 'Пароль',
+
         ];
     }
 

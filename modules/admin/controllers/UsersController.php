@@ -43,21 +43,21 @@ class UsersController extends Controller
 //                ]
 //        );
 //    }
-    public function behaviors(){
-        return [
-            'access' => [
-                'class' => AccessControl::class,
-                'only' => ['index', 'view', 'create', 'update'],
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'actions' => ['index', 'view', 'create', 'update'],
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-        ];
-    }
+//    public function behaviors(){
+//        return [
+//            'access' => [
+//                'class' => AccessControl::class,
+//                'only' => ['index', 'view', 'create', 'update'],
+//                'rules' => [
+//                    [
+//                        'allow' => true,
+//                        'actions' => ['index', 'view', 'create', 'update'],
+//                        'roles' => ['admin'],
+//                    ],
+//                ],
+//            ],
+//        ];
+//    }
 
     /**
      * Lists all User models.
@@ -72,7 +72,7 @@ class UsersController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-//        $user= new User();
+////
 //        $user->created_at = date('y-m-d H:i', time());
 //        if ($user->save()) {
 //////            echo '<pre>';
@@ -146,10 +146,16 @@ class UsersController extends Controller
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
+//        echo '<pre>';
+//            var_dump($model->load($model->save()));
+//            die;
         return $this->render('update', [
             'model' => $model,
         ]);
+//        echo '<pre>';
+//        var_dump($this->render('update', [
+//            'model' => $model,]));
+//        die;
     }
 
     /**

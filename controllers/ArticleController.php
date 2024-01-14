@@ -7,7 +7,8 @@ use app\models\Article;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
-class ArticleController extends Controller
+use app\models\usersearc;
+class  ArticleController extends Controller
 {
 
     public function behaviors()
@@ -16,18 +17,18 @@ class ArticleController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['article', 'showdb', 'text'],
+//                'only' => ['article', 'showdb', 'text'],
                 'rules' => [
                     [
                         'actions' => ['article', 'showdb', 'text'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['author'],
                     ],
-                    [
-                        'actions' => ['login', 'signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
+//                    [
+//                        'actions' => ['login', 'signup'],
+//                        'allow' => true,
+//                        'roles' => ['?'],
+//                    ],
                 ],
             ],];
     }
@@ -39,6 +40,11 @@ class ArticleController extends Controller
         $model->load(\Yii::$app->request->post()) && $model->validate();
         $model->createdAt = date('y-m-d H:i', time());
         $model->updatedAt = date('y-m-d H:i', time());
+//        echo "<pre>";
+//        var_dump(\Yii::$app->user);
+//        die();
+//        $model->author = \Yii::$app->user->username;
+
         if ($model->save()) {
             return $this->render('Save_Confirm', compact('model'));
         } else {
@@ -85,5 +91,17 @@ class ArticleController extends Controller
         $model = Article::findOne($id);
         return $this->render('edit', [ 'model'=>$model]);
     }
-
+//public function actionAuthor ()
+//{
+//    $model = new Article ();
+//    $model->author = \Yii::$app->user->username;
+//    var_dump("ебала");
+//    die();
+//    if ($model->save()) {
+//        return $this->redirect(['save_confirm', 'author' => $model->username]);
+//    }else {
+//        // Возвращаем что-то, например, сообщение об ошибке
+//        return $this->render('error', ['message' => 'Ошибка сохранения статьи']);
+//    }
+//}
 }

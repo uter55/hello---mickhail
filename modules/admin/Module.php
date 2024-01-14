@@ -2,26 +2,28 @@
 
 namespace app\modules\admin;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
+
 /**
  * admin module definition class
  */
 class Module extends \yii\base\Module
 {
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => false,
-                        'actions' => ['/admin/'],
-                        'roles' => ['@'],
-                    ]
-                ],
-            ],
-        ];
-    }
+//    public function behaviors()
+//    {
+//        return [
+//            'access' => [
+//                'class' => AccessControl::className(),
+//                'rules' => [
+//                    [
+//                        'allow' => true,
+//                        'actions' => ['*'],
+//                        'roles' => ['admin'],
+//                    ]
+//                ],
+//            ],
+//        ];
+//    }
     /**
      * {@inheritdoc}
      */
@@ -33,6 +35,11 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
+        if (!\Yii::$app->user->can('admin'))
+        {
+////            $this->redirect("/basic/web/index.php/site/index");
+            return \Yii::$app->response->redirect('/basic/web/index.php/site/index');
+        }
 
         // custom initialization code goes here
     }

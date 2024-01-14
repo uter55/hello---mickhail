@@ -8,8 +8,8 @@ $this->title = Yii::t('app', 'article');
 $this->params['breadcrumbs'][] = $this->title;
 $form = ActiveForm::begin();?>
 <?=$form->field($model,'NameArticle');?>
-<?=$form->field($model, 'text');?>
 <?=$form->field($model,'author');?>
+<?=$form->field($model, 'text')->textarea(['rows' => 6]);?>
     <div class="form-group">
         <?= Html::submitButton('Отправить', ['class' => 'btn btn-primary']) ?>
     </div>

@@ -28,6 +28,10 @@ class User extends \app\models\User
             ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword'],
             [['username','password','role',], 'string'],
             [['position'],'integer'],
+            ['email', 'required'],
+            ['email', 'email'],
+//            ['email', 'unique', 'targetClass' => 'app\models\User', 'message' => 'этот email адресс уже занят'],
+
 //            [['created_at'], 'date', 'format' => 'Y-m-d H:i:s'],
                     ]);
     }
